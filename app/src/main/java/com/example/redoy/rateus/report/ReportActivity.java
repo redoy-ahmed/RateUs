@@ -58,9 +58,9 @@ public class ReportActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        float groupSpace = 0.08f;
-        float barSpace = 0.03f;
-        float barWidth = 0.2f;
+        float groupSpace = 0.05f;
+        float barSpace = 0.02f;
+        float barWidth = 0.1f;
 
         int startYear = 2018;
         int endYear = startYear + 2;
