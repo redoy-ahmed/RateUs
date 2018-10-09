@@ -3,6 +3,6 @@
 
     <string name="login_dummy">Login</string>
     <string name="login">Login</string>
-    <string name="email">Email</string>
+    <string name="user_name">User Name</string>
     <string name="password">Password</string>
 </resources>

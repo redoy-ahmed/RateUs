@@ -1,17 +1,14 @@
 package com.example.redoy.rateus.report;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.graphics.Color;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
-import com.example.redoy.rateus.utils.MyMarkerView;
 import com.example.redoy.rateus.R;
+import com.example.redoy.rateus.database.DatabaseHelper;
+import com.example.redoy.rateus.database.Rating;
+import com.example.redoy.rateus.utils.MyMarkerView;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -20,24 +17,32 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReportActivity extends AppCompatActivity {
 
     private BarChart mChart;
+    private DatabaseHelper db;
+    private List<Rating> ratingList;
+    private List<Integer> yearList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_report);
+
+        yearList = new ArrayList<>();
+        db = new DatabaseHelper(this);
+        ratingList = db.getAllRating();
+
+        for (Rating rating : ratingList) {
+            yearList.add(Integer.valueOf(rating.getDate().substring(0, 4)));
+        }
 
         mChart = findViewById(R.id.chart1);
         mChart.getDescription().setEnabled(false);
@@ -59,6 +64,11 @@ public class ReportActivity extends AppCompatActivity {
 
         int startYear = 2018;
         int endYear = startYear + 2;
+
+        if (yearList.size() > 0) {
+            startYear = yearList.get(0);
+            endYear = yearList.get(yearList.size() - 1) + 2;
+        }
 
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
         ArrayList<BarEntry> yVals2 = new ArrayList<>();

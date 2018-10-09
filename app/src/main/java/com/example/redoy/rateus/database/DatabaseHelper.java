@@ -66,7 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Rating> getAllRating() {
         List<Rating> ratings = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + Rating.TABLE_NAME + " ORDER BY " + Rating.COLUMN_DATE + " DESC";
+        String selectQuery = "SELECT  * FROM " + Rating.TABLE_NAME + " ORDER BY " + Rating.COLUMN_DATE + " ASC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
