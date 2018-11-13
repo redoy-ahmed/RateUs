@@ -12,6 +12,17 @@
         app:cardCornerRadius="7dp"
         app:cardElevation="22dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:text="@string/home_screen_text"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/main_green_color"
+            android:textSize="32sp" />
+
         <ImageView
             android:id="@+id/report_image_view"
             android:layout_width="40dp"
